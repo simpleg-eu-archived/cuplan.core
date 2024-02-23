@@ -37,4 +37,18 @@ public class ResultTest {
 
         Assertions.assertThrows(IllegalStateException.class, okResult::unwrapErr);
     }
+
+    @Test
+    public void isOkOkReturnsTrue() {
+        Result<String, Boolean> okResult = Result.ok("hey");
+
+        Assertions.assertTrue(okResult.isOk());
+    }
+
+    @Test
+    public void isOkErrorReturnsFalse() {
+        Result<String, Boolean> errResult = Result.err(false);
+        
+        Assertions.assertFalse(errResult.isOk());
+    }
 }
