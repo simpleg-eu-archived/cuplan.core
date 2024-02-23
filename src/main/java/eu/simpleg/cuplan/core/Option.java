@@ -32,4 +32,22 @@ public class Option<T> {
 
         return value;
     }
+
+    @Override
+    public int hashCode() {
+        if (isNone()) {
+            return 0;
+        }
+
+        return value.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Option<?>)) {
+            return false;
+        }
+
+        return value.equals(((Option<?>) obj).value);
+    }
 }

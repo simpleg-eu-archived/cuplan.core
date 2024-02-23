@@ -44,4 +44,30 @@ public class Result<TOk, TError> {
 
         return error;
     }
+
+    @Override
+    public int hashCode() {
+        if (success) {
+            return ok.hashCode();
+        } else {
+            return error.hashCode();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Result<?, ?>)) {
+            return false;
+        }
+
+        if (isOk() != ((Result<?, ?>) obj).isOk()) {
+            return false;
+        }
+
+        if (isOk()) {
+            return ok.equals(((Result<?, ?>) obj).ok);
+        }
+
+        return error.equals(((Result<?, ?>) obj).error);
+    }
 }
