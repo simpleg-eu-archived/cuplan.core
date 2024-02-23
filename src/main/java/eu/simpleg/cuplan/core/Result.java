@@ -70,4 +70,13 @@ public class Result<TOk, TError> {
 
         return error.equals(((Result<?, ?>) obj).error);
     }
+
+    @Override
+    public String toString() {
+        if (isOk()) {
+            return ok.toString();
+        }
+
+        return error.toString();
+    }
 }

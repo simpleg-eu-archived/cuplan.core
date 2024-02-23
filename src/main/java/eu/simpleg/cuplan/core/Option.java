@@ -50,4 +50,13 @@ public class Option<T> {
 
         return value.equals(((Option<?>) obj).value);
     }
+
+    @Override
+    public String toString() {
+        if (isNone()) {
+            return "None";
+        }
+
+        return value.toString();
+    }
 }
