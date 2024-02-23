@@ -20,4 +20,32 @@ public class OptionTest {
 
         Assertions.assertThrows(IllegalStateException.class, none::unwrap);
     }
+
+    @Test
+    public void isSomeNoneReturnsFalse() {
+        Option<String> none = Option.none();
+
+        Assertions.assertFalse(none.isSome());
+    }
+
+    @Test
+    public void isSomeSomeReturnsTrue() {
+        Option<String> some = Option.some("hey");
+
+        Assertions.assertTrue(some.isSome());
+    }
+
+    @Test
+    public void isNoneNoneReturnsTrue() {
+        Option<String> none = Option.none();
+
+        Assertions.assertTrue(none.isNone());
+    }
+
+    @Test
+    public void isNoneSomeReturnsFalse() {
+        Option<String> some = Option.some("hey");
+
+        Assertions.assertFalse(some.isNone());
+    }
 }
