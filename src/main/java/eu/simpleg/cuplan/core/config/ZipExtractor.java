@@ -1,6 +1,5 @@
 package eu.simpleg.cuplan.core.config;
 
-import eu.simpleg.cuplan.core.Empty;
 import eu.simpleg.cuplan.core.Error;
 import eu.simpleg.cuplan.core.ErrorKind;
 import eu.simpleg.cuplan.core.Result;
@@ -15,7 +14,7 @@ import java.util.zip.ZipInputStream;
 
 public class ZipExtractor implements Extractor {
     @Override
-    public Result<Empty, Error> extract(byte[] packageData, String targetPath) {
+    public Result<Void, Error> extract(byte[] packageData, String targetPath) {
         try (ZipInputStream zipStream = new ZipInputStream(new ByteArrayInputStream(packageData))) {
             ZipEntry entry;
 
@@ -32,7 +31,7 @@ public class ZipExtractor implements Extractor {
                 zipStream.closeEntry();
             }
 
-            return Result.ok(new Empty());
+            return Result.ok(null);
         } catch (Exception e) {
             return Result.err(new Error(
                     ErrorKind.EXTRACTOR_FAILURE,
