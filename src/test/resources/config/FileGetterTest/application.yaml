@@ -1,0 +1,3 @@
+configuration:
+  nested:
+    test: 1234

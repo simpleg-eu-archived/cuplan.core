@@ -1,0 +1,4 @@
+cors:
+  origins:
+    - "http://localhost:4200"
+    - "https://cuplan.simpleg.eu"

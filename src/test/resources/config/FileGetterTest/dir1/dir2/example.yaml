@@ -1,0 +1,7 @@
+parent:
+  child:
+    name: "Alpha"
+    description: "Whatever"
+    object:
+      a: 2
+      b: 4
