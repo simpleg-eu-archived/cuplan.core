@@ -16,10 +16,12 @@ import java.util.concurrent.CompletableFuture;
 
 public class HttpDownloader implements Downloader {
     private final HttpClient client;
+    private final String accessToken;
     private final long downloadTimeoutInMilliseconds;
 
-    public HttpDownloader(HttpClient client, long downloadTimeoutInMilliseconds) {
+    public HttpDownloader(HttpClient client, String accessToken, long downloadTimeoutInMilliseconds) {
         this.client = client;
+        this.accessToken = accessToken;
         this.downloadTimeoutInMilliseconds = downloadTimeoutInMilliseconds;
     }
 
@@ -39,6 +41,7 @@ public class HttpDownloader implements Downloader {
                     component);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(url))
+                    .header("Authorization", String.format(Locale.ROOT, "Bearer %s", accessToken))
                     .timeout(Duration.ofMillis(downloadTimeoutInMilliseconds))
                     .GET()
                     .build();
