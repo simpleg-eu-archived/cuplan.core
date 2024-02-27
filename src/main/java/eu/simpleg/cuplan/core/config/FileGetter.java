@@ -2,14 +2,17 @@ package eu.simpleg.cuplan.core.config;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import eu.simpleg.cuplan.core.Cache;
 import eu.simpleg.cuplan.core.Error;
-import eu.simpleg.cuplan.core.*;
+import eu.simpleg.cuplan.core.ErrorKind;
+import eu.simpleg.cuplan.core.Result;
 import org.apache.commons.io.FileUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class FileGetter implements Getter {
@@ -41,10 +44,10 @@ public class FileGetter implements Getter {
     public <T> CompletableFuture<Result<T, Error>> get(Path filePath, String key, Class<T> type) {
         try {
             filePath = targetDirectory.resolve(filePath);
-            Option<Object> cacheResult = cache.tryGetValue(filePath.toString());
+            Optional<Object> cacheResult = cache.tryGetValue(filePath.toString());
 
-            if (cacheResult.isSome()) {
-                Object yamlObject = cacheResult.unwrap();
+            if (cacheResult.isPresent()) {
+                Object yamlObject = cacheResult.get();
                 JsonElement jsonElement = gson.toJsonTree(yamlObject);
 
                 return CompletableFuture.completedFuture(getByKey(jsonElement, key, type));

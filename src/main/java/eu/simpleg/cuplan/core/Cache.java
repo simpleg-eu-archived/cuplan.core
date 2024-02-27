@@ -1,9 +1,6 @@
 package eu.simpleg.cuplan.core;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Cache implements AutoCloseable {
@@ -47,18 +44,18 @@ public class Cache implements AutoCloseable {
         cache.put(key, cacheItem);
     }
 
-    public Option<Object> tryGetValue(String key) {
+    public Optional<Object> tryGetValue(String key) {
         CacheItem<Object> cacheItem = cache.get(key);
 
         if (cacheItem != null && !cacheItem.isExpired()) {
-            return Option.some(cacheItem.value());
+            return Optional.of(cacheItem.value());
         }
 
         if (cacheItem != null) {
             cache.remove(key);
         }
 
-        return Option.none();
+        return Optional.empty();
     }
 
     public boolean hasKey(String key) {
