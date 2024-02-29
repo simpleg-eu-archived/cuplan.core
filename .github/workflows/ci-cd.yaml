@@ -34,7 +34,8 @@ jobs:
         run: |
           echo "github.artifactory.url=$MAVEN_ARTIFACTORY" >> gradle.properties
           echo "github.artifactory.username=$MAVEN_ARTIFACTORY_USERNAME" >> gradle.properties
-          echo "github.artifactory.password=$MAVEN_ARTIFACTORY_PASSWORD" >> gradle.properties
+          echo "github.artifactory.password=$MAVEN_ARTIFACTORY_USERNAME" >> gradle.properties
+          echo "$(cat gradle.properties)"
       - name: Run tests
         run: |
           mkdir bin
