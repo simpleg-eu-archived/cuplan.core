@@ -25,6 +25,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
+      - name: Replace placeholder version
+        run: |
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./build.gradle
+        env:
+          PATCH_VERSION: ${{ github.run_number }}
       - name: Prepare Gradle configuration
         run: |
           echo "github.artifactory.url=$MAVEN_ARTIFACTORY" >> gradle.properties
