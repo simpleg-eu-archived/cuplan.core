@@ -1,4 +1,4 @@
-name: CI only
+name: CI & CD
 
 on:
   push:
@@ -34,6 +34,7 @@ jobs:
         run: |
           ./gradlew test
   cd:
+    needs: ci
     runs-on: ubuntu-latest
 
     timeout-minutes: 10
