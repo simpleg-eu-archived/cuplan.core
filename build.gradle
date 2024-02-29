@@ -26,19 +26,24 @@ test {
 }
 
 publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifactId = 'cuplan.core'
+        }
+    }
+}
+
+publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri(findProperty("github.artifactory.url"))
+            url = project.findProperty("github.artifactory.url")
             credentials {
-                username = findProperty("github.artifactory.username")
-                password = findProperty("github.artifactory.password")
+                username = project.findProperty("github.artifactory.username")
+                password = project.findProperty("github.artifactory.password")
             }
-        }
-    }
-    publications {
-        gpr(MavenPublication) {
-            from(components.java)
         }
     }
 }
