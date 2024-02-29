@@ -28,12 +28,17 @@ test {
 publishing {
     repositories {
         maven {
-            name = "GithubPackages"
+            name = "GitHubPackages"
             url = uri(findProperty("github.artifactory.url"))
             credentials {
                 username = findProperty("github.artifactory.username")
                 password = findProperty("github.artifactory.password")
             }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
         }
     }
 }
